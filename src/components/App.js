@@ -34,22 +34,13 @@ const App = () => {
   ];
 
   const indiaCityList = cityList.filter((city) => city.country === "India");
-  function NestedCityList({city, index = 0}) {
-    if (index === city.length) {
-      return null;
-    }
-    return (
-      <li key={`location${index + 1}`}>
-        {city[index].name} → {city[index].country} {" "}
-        <ol>{<NestedCityList city={city} index={index+1} />}</ol>{" "}
-      </li>
-    );
-  }
-
+  const City = ({ name }) => <li>{name}</li>;
   return (
     <div id="main">
       {/* Do not remove the main div */}
-      <ol>{<NestedCityList city={indiaCityList} />}</ol>
+      <ol>
+        {indiaCityList.map((city,index) => <City key={`location${index + 1}`} name={city.name} /> )}
+      </ol>
     </div>
   );
 };
