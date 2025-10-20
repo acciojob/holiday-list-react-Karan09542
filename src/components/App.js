@@ -34,14 +34,14 @@ const App = () => {
   ];
 
   const indiaCityList = cityList.filter((city) => city.country === "India");
-  function renderNestedCityList(city, index = 0) {
+  function NestedCityList({city, index = 0}) {
     if (index === city.length) {
       return null;
     }
     return (
       <li key={`location${index + 1}`}>
-        {city[index].country} : {city[index].name}{" "}
-        <ol>{renderNestedCityList(city, index + 1)}</ol>{" "}
+        {city[index].name} → {city[index].country} {" "}
+        <ol>{<NestedCityList city={city} index={index+1} />}</ol>{" "}
       </li>
     );
   }
@@ -49,7 +49,7 @@ const App = () => {
   return (
     <div id="main">
       {/* Do not remove the main div */}
-      <ol>{renderNestedCityList(indiaCityList)}</ol>
+      <ol>{<NestedCityList city={indiaCityList} />}</ol>
     </div>
   );
 };
